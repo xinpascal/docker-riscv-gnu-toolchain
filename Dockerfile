@@ -1,6 +1,6 @@
 FROM ubuntu:18.04 as builder
 
-ENV BRANCH=master
+ENV BRANCH=rvv-0.8.x
 ENV ISA=rv64imafdcv
 ENV RISCV=/opt/riscv
 
