@@ -1,7 +1,7 @@
 FROM ubuntu:18.04 as builder
 
 ENV BRANCH=master
-ENV ISA=rv64imafdc
+ENV ISA=rv32imafdc
 ENV RISCV=/opt/riscv
 
 RUN apt-get update
@@ -24,4 +24,4 @@ RUN apt-get update && apt-get install -y autoconf automake curl gawk build-essen
 
 COPY --from=builder $RISCV $RISCV
 
-CMD riscv64-unknown-elf-gcc -v
+CMD riscv32-unknown-elf-gcc -v
