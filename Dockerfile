@@ -1,7 +1,7 @@
-FROM ubuntu:18.04 as builder
+FROM ubuntu:20.04 as builder
 
-ENV BRANCH=master
-ENV ISA=rv64imafdc
+ENV BRANCH=rvv-intrinsic
+ENV ISA=rv64imafdcv_zfh
 ENV RISCV=/opt/riscv
 
 RUN apt-get update
@@ -11,10 +11,10 @@ RUN apt-get install -y git
 RUN git clone https://github.com/riscv/riscv-gnu-toolchain
 WORKDIR riscv-gnu-toolchain
 RUN git checkout $BRANCH && git submodule update --init --recursive
-RUN ./configure --with-arch=$ISA --prefix=$RISCV && make -j`nproc`
+RUN ./configure --with-arch=$ISA --prefix=$RISCV && make -j`nproc` && make -j`nproc` linux
 
 ##########################################
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 ENV RISCV=/opt/riscv
 ENV PATH=$RISCV/bin:$PATH
